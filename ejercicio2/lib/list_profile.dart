@@ -31,7 +31,7 @@ class Listprofile extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 10),
+                  padding: const EdgeInsets.only(left: 30, top: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -59,7 +59,7 @@ class Listprofile extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             textStyle: const TextStyle(
                                 fontSize: 18,
-                                color: Color.fromARGB(95, 73, 72, 72)),
+                                 color: Color.fromARGB(240, 95, 95, 95)),
                           ),
                         ),
                       ),
@@ -67,7 +67,7 @@ class Listprofile extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 10),
+                  padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -96,7 +96,7 @@ class Listprofile extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             textStyle: const TextStyle(
                                 fontSize: 18,
-                                color: Color.fromARGB(95, 73, 72, 72)),
+                                color: Color.fromARGB(240, 95, 95, 95)),
                           ),
                         ),
                       )
