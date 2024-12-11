@@ -21,8 +21,28 @@ class _PeopleScreenState extends State<PeopleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        title: const Text('People'),
+        title: Row(
+          children: [
+            Image.network(
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png',
+              height: 50,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 60),
+              child: Text(
+                'People',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color.fromARGB(255, 255, 232, 31),
+                  fontFamily: 'StarWarsFonts',
+                ),
+              ),
+            )
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
       ),
       body: FutureBuilder<PeopleResponse>(
         future: peopleResponse,
@@ -52,9 +72,45 @@ class _PeopleScreenState extends State<PeopleScreen> {
 
   Widget _buildPeopleList(PeopleResponse peopleResponse) {
     return ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: peopleResponse.results!.length,
         itemBuilder: (context, index) {
-          return Text(peopleResponse.results![index].name!);
+          return SizedBox(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 60, left: 30),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(70),
+                    child: Image(
+                      image: NetworkImage(
+                          'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg'),
+                      height: 500,
+                      width: 300,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 250,
+                  child: ListTile(
+                    title: Text(
+                      peopleResponse.results![index].name!,
+                      style: const TextStyle(
+                          fontSize: 22,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontFamily: 'StarWarsFonts'),
+                    ),
+                    subtitle: Text(
+                      peopleResponse.results![index].gender!,
+                      style: const TextStyle(
+                          fontSize: 18, fontFamily: 'StarWarsFonts'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
         });
   }
 }
