@@ -76,39 +76,52 @@ class _PeopleScreenState extends State<PeopleScreen> {
         itemCount: peopleResponse.results!.length,
         itemBuilder: (context, index) {
           return SizedBox(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 60, left: 30),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(70),
+            width: 350,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20, top: 60, left: 20),
+              child: Stack(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
                     child: Image(
                       image: NetworkImage(
                           'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg'),
-                      height: 500,
-                      width: 300,
+                      height: 600,
+                      width: 350,
                       fit: BoxFit.cover,
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 250,
-                  child: ListTile(
-                    title: Text(
-                      peopleResponse.results![index].name!,
-                      style: const TextStyle(
-                          fontSize: 22,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontFamily: 'StarWarsFonts'),
-                    ),
-                    subtitle: Text(
-                      peopleResponse.results![index].gender!,
-                      style: const TextStyle(
-                          fontSize: 18, fontFamily: 'StarWarsFonts'),
-                    ),
-                  ),
-                ),
-              ],
+                  Container(
+                    margin: const EdgeInsets.only(top: 500),
+                      alignment: Alignment.center,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(0, 0, 0, 0),
+                              Color.fromARGB(127, 0, 0, 0),
+                              Color.fromARGB(199, 0, 0, 0),
+                              Color.fromARGB(255, 0, 0, 0)
+                            ],
+                            begin: FractionalOffset.topCenter,
+                            end: FractionalOffset.bottomCenter),
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          peopleResponse.results![index].name!,
+                          style: const TextStyle(
+                              fontSize: 22,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontFamily: 'StarWarsFonts'),
+                        ),
+                        subtitle: Text(
+                          peopleResponse.results![index].gender!,
+                          style: const TextStyle(
+                              fontSize: 18, fontFamily: 'StarWarsFonts', color: Color.fromARGB(255, 155, 154, 154)),
+                        ),
+                      ),),
+                ],
+              ),
             ),
           );
         });
