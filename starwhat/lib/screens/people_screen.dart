@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:starwhat/models/people_response/people.dart';
 import 'package:starwhat/models/people_response/people_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:starwhat/screens/poeple_details_screen.dart';
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -75,7 +77,22 @@ class _PeopleScreenState extends State<PeopleScreen> {
         scrollDirection: Axis.horizontal,
         itemCount: peopleResponse.results!.length,
         itemBuilder: (context, index) {
-          return SizedBox(
+           return _buildPeopleItem(context, peopleResponse.results![index]);
+        });
+  }
+
+  Widget _buildPeopleItem(BuildContext context, People people) {
+    final url = people.url;
+    final id = url!.split('/')[5];
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PeopleDetail(peopleItem: people),
+            ),
+          );
+        },
+        child: SizedBox(
             width: 350,
             child: Padding(
               padding: const EdgeInsets.only(right: 20, top: 60, left: 20),
@@ -85,7 +102,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
                     borderRadius: BorderRadius.circular(40),
                     child: Image(
                       image: NetworkImage(
-                          'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg'),
+                          "https://starwars-visualguide.com/assets/img/characters/$id.jpg"),
                       height: 600,
                       width: 350,
                       fit: BoxFit.cover,
@@ -108,14 +125,14 @@ class _PeopleScreenState extends State<PeopleScreen> {
                       ),
                       child: ListTile(
                         title: Text(
-                          peopleResponse.results![index].name!,
+                          people.name!,
                           style: const TextStyle(
                               fontSize: 22,
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'StarWarsFonts'),
                         ),
                         subtitle: Text(
-                          peopleResponse.results![index].gender!,
+                          people.gender!,
                           style: const TextStyle(
                               fontSize: 18, fontFamily: 'StarWarsFonts', color: Color.fromARGB(255, 155, 154, 154)),
                         ),
@@ -123,7 +140,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
                 ],
               ),
             ),
-          );
-        });
+          )
+        );
   }
 }
